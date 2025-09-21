@@ -1,10 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Roulette App</title>
+  <title>Roulette App</title>
 </head>
 <body>
-    <h1>Welcome to the Roulette App 🎰</h1>
-    <p>Click <a href="/spin">here</a> to spin the wheel!</p>
+  <h1>Welcome to the Roulette App 🎰</h1>
+  <button onclick="spin()">Spin the Wheel</button>
+  <p id="result"></p>
+
+  <script>
+    function spin() {
+      fetch('/spin')
+        .then(response => response.text())
+        .then(data => {
+          document.getElementById('result').innerText = data;
+        })
+        .catch(error => {
+          document.getElementById('result').innerText = 'Error: ' + error;
+        });
+    }
+  </script>
 </body>
 </html>
